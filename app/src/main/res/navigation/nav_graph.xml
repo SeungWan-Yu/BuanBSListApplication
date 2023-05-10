@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.buanbslistapplication.FirstFragment"
+        android:label="부안교회 성도수첩"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.buanbslistapplication.SecondFragment"
+        android:label="회별 목록"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.example.buanbslistapplication.ThirdFragment"
+        android:label="구역별 목록"
+        tools:layout="@layout/fragment_third" >
+        <action
+            android:id="@+id/action_thirdFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_thirdFragment_to_areaListFragment"
+            app:destination="@id/areaListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.buanbslistapplication.SearchFragment"
+        android:label="성도 검색"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.buanbslistapplication.ListFragment"
+        android:label="{belong}"
+        tools:layout="@layout/fragment_list" >
+        <argument
+            android:name="belong"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+    <fragment
+        android:id="@+id/areaListFragment"
+        android:name="com.example.buanbslistapplication.AreaListFragment"
+        android:label="{area}"
+        tools:layout="@layout/fragment_area_l_ist">
+        <argument
+            android:name="area"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+</navigation>
