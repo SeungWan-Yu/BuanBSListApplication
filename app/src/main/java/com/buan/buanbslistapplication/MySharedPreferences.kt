@@ -10,6 +10,10 @@ class MySharedPreferences(context: Context)  {
     var checkvalue = 0
 
     var check: Int
-        get() = prefs.getInt(PREF_KEY_MY_ID, 99)
+        get() = prefs.getInt(PREF_KEY_MY_ID, 0)
         set(value) = prefs.edit().putInt(PREF_KEY_MY_ID, value).apply()
+
+    var first: Int
+        get() = prefs.getInt("first", 0)
+        set(value) = prefs.edit().putInt("first", value).apply()
 }

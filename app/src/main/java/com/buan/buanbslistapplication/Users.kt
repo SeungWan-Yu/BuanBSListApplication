@@ -13,3 +13,8 @@ data class Users(
     val photo : String,
     val etc : String
 )
+
+@Serializable
+data class Version(
+    val vs : String
+)

@@ -1,6 +1,7 @@
 package com.buan.buanbslistapplication
 
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -57,6 +58,12 @@ class FirstFragment : Fragment() {
         }
         binding.textView2.setOnClickListener {
             checkNetwork()
+        }
+
+
+        if (App.prefs.first == 0){ //최초실행
+            checkNetwork()
+            App.prefs.first = 1
         }
     }
 

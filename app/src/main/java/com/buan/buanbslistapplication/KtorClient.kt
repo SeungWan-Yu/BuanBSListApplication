@@ -10,7 +10,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.serialization.json.Json
 
-object KrotClient {
+object KtorClient {
 
     //제이슨 설정
     private val json = Json {

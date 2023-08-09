@@ -1,9 +1,11 @@
 package com.buan.buanbslistapplication
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,20 +22,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //최초 실행 여부 판단하는 구문
-        val pref = getSharedPreferences("isFirst", MODE_PRIVATE)
-        val first = pref.getBoolean("isFirst", false)
-        if (first == false) {
-            Log.d("Is first Time?", "first")
-            val editor = pref.edit()
-            editor.putBoolean("isFirst", true)
-            editor.commit()
-            //앱 최초 실행시 하고 싶은 작업
-            val fragment : FirstFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as FirstFragment
-            fragment.checkNetwork()
-        } else {
-            Log.d("Is first Time?", "not first")
-        }
+//        //최초 실행 여부 판단하는 구문
+//        val pref = getSharedPreferences("isFirst", MODE_PRIVATE)
+//        val first = pref.getBoolean("isFirst", false)
+//        if (first == false) {
+//            Log.d("Is first Time?", "first")
+//            val editor = pref.edit()
+//            editor.putBoolean("isFirst", true)
+//            editor.commit()
+//            //앱 최초 실행시 하고 싶은 작업
+//            val fragment : FirstFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as FirstFragment
+//            fragment.checkNetwork()
+//        } else {
+//            Log.d("Is first Time?", "not first")
+//        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

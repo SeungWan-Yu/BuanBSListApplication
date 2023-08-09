@@ -39,7 +39,7 @@ class UserAdapter(
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
-        val imageView = itemView?.findViewById<ImageView>(R.id.imageView)
+        val img = itemView?.findViewById<ImageView>(R.id.imageView)
         val name = itemView?.findViewById<TextView>(R.id.user_name)
         val phone = itemView?.findViewById<TextView>(R.id.user_phone)
         val addr = itemView?.findViewById<TextView>(R.id.user_addr)
@@ -52,14 +52,17 @@ class UserAdapter(
             if (user?.photourl == null){
                 Glide.with(context)
                     .load(R.drawable.ic_launcher_foreground)
-                    .into(imageView!!)
+                    .into(img!!)
             }else{
                 val bitmap = BitmapFactory.decodeByteArray(user?.photourl, 0,
                 user?.photourl?.size!!)
                 Glide.with(context)
                     .load(bitmap)
-                    .into(imageView!!)
-
+                    .into(img!!)
+                img.setOnClickListener {
+                    val dialog2 = PhotoDialog(context,bitmap)
+                    dialog2.show()
+                }
 //            Glide.with(context)
 //                .load(user?.photo)
 //                .placeholder(android.R.drawable.ic_popup_sync)
@@ -70,7 +73,9 @@ class UserAdapter(
             name?.text = user?.name
             phone?.text = user?.phone
             addr?.text = user?.address
-           itemView.setOnClickListener { clickListener(user!!) }
+            itemView.setOnClickListener {
+                clickListener(user!!)
+            }
         }
 
     }
