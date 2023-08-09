@@ -49,13 +49,14 @@ class UserAdapter(
         fun bind(user: RoomDB.User?, clickListener: (RoomDB.User) -> Unit,context:Activity) {
 
             // 바이트 배열로부터 Bitmap 객체를 만듭니다
+            Log.d("asdasd", "bind:${user?.photourl}")
             if (user?.photourl == null){
                 Glide.with(context)
                     .load(R.drawable.ic_launcher_foreground)
                     .into(img!!)
             }else{
-                val bitmap = BitmapFactory.decodeByteArray(user?.photourl, 0,
-                user?.photourl?.size!!)
+                val bitmap = BitmapFactory.decodeByteArray(user.photourl, 0,
+                user.photourl.size)
                 Glide.with(context)
                     .load(bitmap)
                     .into(img!!)

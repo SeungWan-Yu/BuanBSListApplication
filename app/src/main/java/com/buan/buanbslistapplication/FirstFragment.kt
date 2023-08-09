@@ -159,14 +159,15 @@ class FirstFragment : Fragment() {
 //                    userDao.imageDao(null)
                     } else {
                         Log.d("asdasd", "check")
-                        Glide.with(requireActivity())
+                        Glide.with(this@FirstFragment)
                             .asBitmap()
                             .load("http://drive.google.com/uc?export=view&id=${userData[i].photo}")
-                            .into(object : CustomTarget<Bitmap>() {
+                            .into(object : CustomTarget<Bitmap>(100,100) {
                                 override fun onResourceReady(
                                     resource: Bitmap,
                                     transition: Transition<in Bitmap>?
                                 ) {
+                                    Log.d("asdasd", "check2")
                                     val byteArrayOutputStream = ByteArrayOutputStream()
                                     val success = resource.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
                                     if (!success) {
@@ -185,7 +186,11 @@ class FirstFragment : Fragment() {
                                 }
 
                                 override fun onLoadCleared(placeholder: Drawable?) {
-                                    Log.d("asdasd", "onLoadCleared: fail")
+                                    Log.d("asdasd", "onLoadCleared: Cleared")
+                                }
+
+                                override fun onLoadFailed(errorDrawable: Drawable?) {
+                                    Log.d("asdasd", "onLoadFailed: fail")
                                 }
                             })
                     }
