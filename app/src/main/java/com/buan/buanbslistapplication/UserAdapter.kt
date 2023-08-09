@@ -1,4 +1,4 @@
-package com.example.buanbslistapplication
+package com.buan.buanbslistapplication
 
 import android.annotation.SuppressLint
 import android.app.Activity

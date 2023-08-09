@@ -1,4 +1,4 @@
-package com.example.buanbslistapplication
+package com.buan.buanbslistapplication
 
 import android.content.Context
 import android.net.ConnectivityManager

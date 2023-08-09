@@ -1,4 +1,4 @@
-package com.example.buanbslistapplication
+package com.buan.buanbslistapplication
 
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +9,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.buanbslistapplication.databinding.FragmentSecondBinding
-import com.example.buanbslistapplication.databinding.FragmentThirdBinding
+import com.buan.buanbslistapplication.databinding.FragmentThirdBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

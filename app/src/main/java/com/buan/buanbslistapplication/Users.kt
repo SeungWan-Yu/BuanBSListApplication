@@ -1,4 +1,4 @@
-package com.example.buanbslistapplication
+package com.buan.buanbslistapplication
 
 import kotlinx.serialization.Serializable
 

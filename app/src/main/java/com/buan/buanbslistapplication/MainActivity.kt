@@ -1,4 +1,4 @@
-package com.example.buanbslistapplication
+package com.buan.buanbslistapplication
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.buanbslistapplication.databinding.ActivityMainBinding
+import com.buan.buanbslistapplication.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {

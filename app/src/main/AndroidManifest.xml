@@ -18,16 +18,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".PWActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BuanBSListApplication.NoActionBar"/>
+        <activity
+            android:name=".SplashActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.BuanBSListApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.BuanBSListApplication.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
