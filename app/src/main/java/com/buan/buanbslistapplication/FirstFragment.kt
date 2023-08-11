@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.buan.buanbslistapplication.databinding.FragmentFirstBinding
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -162,7 +163,9 @@ class FirstFragment : Fragment() {
                         Glide.with(this@FirstFragment)
                             .asBitmap()
                             .load("http://drive.google.com/uc?export=view&id=${userData[i].photo}")
-                            .into(object : CustomTarget<Bitmap>(100,100) {
+                            .override(200,200)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(object : CustomTarget<Bitmap>() {
                                 override fun onResourceReady(
                                     resource: Bitmap,
                                     transition: Transition<in Bitmap>?
@@ -183,22 +186,47 @@ class FirstFragment : Fragment() {
                                     // Room DAO를 사용하여 데이터베이스에 이미지를 삽입합니다
                                     Log.d("asdasd", "imageDao ${i+1},$byteArray")
                                     userDao.imageDao(i+1, byteArray)
+                                    if (i == userData.size-1) {
+                                        dialog2.dismiss()
+                                        Toast.makeText(
+                                            requireActivity(),
+                                            "성도 목록이 업데이트 되었습니다.",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }
                                 }
 
                                 override fun onLoadCleared(placeholder: Drawable?) {
                                     Log.d("asdasd", "onLoadCleared: Cleared")
+                                    if (i == userData.size-1) {
+                                        dialog2.dismiss()
+//                                        Toast.makeText(
+//                                            requireActivity(),
+//                                            "성도 목록이 업데이트 되었습니다.",
+//                                            Toast.LENGTH_SHORT
+//                                        )
+//                                            .show()
+                                    }
                                 }
 
                                 override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    Log.d("asdasd", "onLoadFailed: fail")
+                                    Log.d("asdasd", "onLoadFailed: fail / $i, ${userData.size-1}")
+                                    if (i == 0) {
+                                        dialog2.dismiss()
+                                        Toast.makeText(
+                                            requireActivity(),
+                                            "업데이트 실패,\n나중에 다시 시도해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }
                                 }
                             })
                     }
                 }
             }.await()
-            dialog2.dismiss()
-            Toast.makeText(requireActivity(), "성도 목록이 업데이트 되었습니다.", Toast.LENGTH_SHORT)
-                .show()
+
         }
     }
 
