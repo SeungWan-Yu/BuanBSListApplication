@@ -1,16 +1,19 @@
 package com.buan.buanbslistapplication
 
 import android.app.AlertDialog
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -29,10 +32,11 @@ import java.io.ByteArrayOutputStream
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    var count = 0
+    private lateinit var viewModel: MyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +50,8 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(requireActivity())[MyViewModel::class.java]
 
 
         binding.bt1.setOnClickListener {
@@ -117,6 +123,9 @@ class FirstFragment : Fragment() {
                         element.etc,
                         null
                     ))
+                    if (element.photo.isNotEmpty()){
+                        count = element.id
+                    }
                 }
                 val response2 : List<Users> = UserRepo.fetchUsers2()
                 Log.d("TAG", "response: $response")
@@ -132,6 +141,9 @@ class FirstFragment : Fragment() {
                         element.etc,
                         null
                     ))
+                    if (element.photo.isNotEmpty()){
+                        count = element.id
+                    }
                 }
                 val response3 : List<Users> = UserRepo.fetchUsers3()
                 Log.d("TAG", "response: $response")
@@ -147,10 +159,13 @@ class FirstFragment : Fragment() {
                         element.etc,
                         null
                     ))
+                    if (element.photo.isNotEmpty()){
+                        count = element.id
+                    }
                 }
             }.await()
             dialog.dismiss()
-            val dialog2 = LoadingDialog2(requireActivity())
+            val dialog2 = LoadingDialog2(requireContext(),count,this@FirstFragment,this@FirstFragment)
             dialog2.show()
             CoroutineScope(Dispatchers.IO).async {
                 val userData = userDao.getAll()
@@ -159,6 +174,9 @@ class FirstFragment : Fragment() {
                     if (userData[i].photo!!.isEmpty()) {
 //                    userDao.imageDao(null)
                     } else {
+                        Handler(Looper.getMainLooper()).post {
+                            viewModel.updateData(i)
+                        }
                         Log.d("asdasd", "check")
                         Glide.with(this@FirstFragment)
                             .asBitmap()
@@ -166,6 +184,7 @@ class FirstFragment : Fragment() {
                             .override(200,200)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(object : CustomTarget<Bitmap>() {
+
                                 override fun onResourceReady(
                                     resource: Bitmap,
                                     transition: Transition<in Bitmap>?
@@ -184,9 +203,9 @@ class FirstFragment : Fragment() {
                                     // 해당 클래스는 @Entity 어노테이션을 사용하여 정의되어야 합니다.
 
                                     // Room DAO를 사용하여 데이터베이스에 이미지를 삽입합니다
-                                    Log.d("asdasd", "imageDao ${i+1},$byteArray")
+                                    Log.d("asdasd", "imageDao ${i},$byteArray /userData.size ${userData.size-1} $count")
                                     userDao.imageDao(i+1, byteArray)
-                                    if (i == userData.size-1) {
+                                    if (i+1 == count) {
                                         dialog2.dismiss()
                                         Toast.makeText(
                                             requireActivity(),
