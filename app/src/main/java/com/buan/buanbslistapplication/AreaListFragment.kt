@@ -44,9 +44,6 @@ class AreaListFragment : Fragment() {
             "13구역" -> {
                 data = "13"
             }
-            "14구역" -> {
-                data = "14"
-            }
             "21구역" -> {
                 data = "21"
             }
@@ -56,8 +53,14 @@ class AreaListFragment : Fragment() {
             "23구역" -> {
                 data = "23"
             }
-            "24구역" -> {
-                data = "24"
+            "31구역" -> {
+                data = "31"
+            }
+            "32구역" -> {
+                data = "32"
+            }
+            "33구역" -> {
+                data = "33"
             }
         }
         val userDao: RoomDB.UserDao = RoomDB.AppDatabase.getInstance(requireContext())!!.userDao()

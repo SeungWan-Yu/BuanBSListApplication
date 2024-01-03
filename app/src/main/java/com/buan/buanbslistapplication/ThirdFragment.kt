@@ -45,7 +45,7 @@ class ThirdFragment : Fragment() {
 //                Toast.makeText(requireContext(), "Clicked item: $item", Toast.LENGTH_SHORT).show()
             }
 
-        val items = listOf("11구역", "12구역", "13구역", "14구역","21구역","22구역","23구역","24구역")
+        val items = listOf("11구역", "12구역", "13구역","21구역","22구역","23구역","31구역","32구역","33구역")
         val adapter = StringListAdapter(requireContext(), items)
         listView.adapter = adapter
     }
