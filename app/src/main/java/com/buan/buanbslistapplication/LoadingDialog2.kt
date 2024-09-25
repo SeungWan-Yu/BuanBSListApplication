@@ -25,12 +25,19 @@ class LoadingDialog2(context: Context, count:Int,private val lifecycleOwner: Lif
 
         setContentView(R.layout.dialog_loading2)
 
+//        // LiveData 관찰
+//        viewModel.data.observe(lifecycleOwner, Observer { newData ->
+//            var percent = findViewById<TextView>(R.id.textView6)
+//            percent.text = "$newData"
+//        })
+
+
         viewModel = ViewModelProvider(viewModelStoreOwner)[MyViewModel::class.java]
 
         viewModel.data.observe(lifecycleOwner, Observer { newData ->
             // newData가 변경될 때마다 이 블록이 호출됩니다.
             var percent = findViewById<TextView>(R.id.textView6)
-            percent.text = "$count / $newData"
+//            percent.text = "$newData"
 //            percent.text = newData.toString()
         })
 

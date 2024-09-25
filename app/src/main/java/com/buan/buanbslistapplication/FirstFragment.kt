@@ -176,6 +176,7 @@ class FirstFragment : Fragment() {
                     } else {
                         Handler(Looper.getMainLooper()).post {
                             viewModel.updateData(i)
+                            Log.d("updateData", i.toString())
                         }
                         Log.d("asdasd", "check")
                         Glide.with(this@FirstFragment)
